@@ -67,5 +67,8 @@ export EDITOR='vim'
 # Homeshick dotfiles manager setup
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
-# Homeshick tab completion for ZSH
+# Homeshick: tab completion for ZSH
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+
+# Homeshick: check for dotfiles changes to pull every week
+homeshick --quiet refresh

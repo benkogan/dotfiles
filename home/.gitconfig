@@ -1,0 +1,10 @@
+[user]
+	name = Ben Kogan
+	email = benkogan@me.com
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/Ben/.gitignore
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
