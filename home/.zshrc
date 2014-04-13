@@ -18,6 +18,7 @@ alias proj="cd ~/Documents/Projects/"
 alias os="~/Documents/Columbia\ classes/Operating\ Systems/"
 alias valg="valgrind --leak-check=yes --track-origins=yes"
 alias c="clear"
+alias a="ls -a1"
 alias mytree="find . -type d | sed -e 1d -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|-/'"
 alias atom="/Applications/Atom.app/Contents/Resources/app/atom.sh $*"
 

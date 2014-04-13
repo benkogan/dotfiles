@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/Ben/.gitignore
+	excludesfile = /Users/Ben/.gitglobal
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
