@@ -16,6 +16,8 @@ set hlsearch                    " highlight last used search pattern
 set colorcolumn=80              " highlight 80th column
 set cursorline                  " highlight cursor line
 set number                      " show line numbers
+set hidden                      " buffers can be hidden without saving first
+set confirm                     " confirm if abandoning buf with unsaved changes
 set showmatch                   " show matching brackets under cursor...
 set mat=2                       " ...and blink every 2 tenths of a second
 set history=100		        " keep 100 lines of command line history
@@ -25,7 +27,7 @@ set viminfo+=n~/.vim/.viminfo   " store .viminfo in ~/.vim
 set display+=lastline           " display last line, even if cut off by bottom
 set background=dark             " use dark theme background
 set noeb vb t_vb=               " no beep, no flash for bell
-set t_co=256                    " use 256 colors
+set t_Co=256                    " use 256 colors
 
 " Enable pathogen.vim
 runtime bundle/vim-pathogen/autoload/pathogen.vim
@@ -49,6 +51,7 @@ if !&sidescrolloff
     set sidescrolloff=5
 endif
 
+let g:vim_markdown_folding_disabled=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPPINGS
@@ -86,7 +89,9 @@ let g:tmuxline_separators = {
 let g:tmuxline_preset = {
     \ 'a'    : 'SESSION #S',
     \ 'b'    : '',
-    \ 'c'    : '#W',
+    \ 'c'    : '',
+    \'win'   : '#I:#W',
+    \'cwin'  : '#I:#W',
     \ 'x'    : '#(~/scripts/weather.sh)',
     \ 'y'    : '%I:%M · %a · #(date +"%y-%m-%d") · #(~/scripts/battery.sh)%%',
     \ 'z'    : '#h'}
@@ -94,6 +99,11 @@ let g:tmuxline_preset = {
 " vim-airline: section seperators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" vim-bufferline: don't highlight current buffer if it's the only buffer
+let g:bufferline_solo_highlight = 1
+let g:bufferline_active_highlight = 'StatusLine'
+let g:bufferline_fname_mod = ':p:~:.'
 
 " Set gitgutter and syntastic gutter background to clear
 highlight clear SignColumn
@@ -126,6 +136,8 @@ autocmd FileType make,markdown setlocal noexpandtab
 
 " In text files, follow prev line indent, replace tab with spaces, softtab = 2
 autocmd FileType text setlocal autoindent expandtab softtabstop=2
+
+autocmd FileType javascript,html,css setlocal ts=2 sts=2 sw=2 expandtab autoindent
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

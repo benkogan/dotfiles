@@ -43,7 +43,7 @@ source $ZSH/oh-my-zsh.sh
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 # <https://github.com/wayneeseguin/rvm/issues/1351#issuecomment-10939525>
-export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$HOME/bin"
 
 # Add python to PATH
 if [ -d "/usr/local/share/python" ]; then
@@ -73,3 +73,4 @@ fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
 # Homeshick: check for dotfiles changes to pull every week
 homeshick --quiet refresh
+
