@@ -92,7 +92,7 @@ let g:tmuxline_preset = {
     \ 'c'    : '',
     \'win'   : '#I:#W',
     \'cwin'  : '#I:#W',
-    \ 'x'    : '#(~/scripts/weather.sh)',
+    \ 'x'    : '#(weather -c)',
     \ 'y'    : '%I:%M · %a · #(date +"%y-%m-%d") · #(~/scripts/battery.sh)%%',
     \ 'z'    : '#h'}
 
@@ -137,7 +137,7 @@ autocmd FileType make,markdown setlocal noexpandtab
 " In text files, follow prev line indent, replace tab with spaces, softtab = 2
 autocmd FileType text setlocal autoindent expandtab softtabstop=2
 
-autocmd FileType javascript,html,css setlocal ts=2 sts=2 sw=2 expandtab autoindent
+autocmd FileType javascript,html,css,sh setlocal ts=2 sts=2 sw=2 expandtab autoindent
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
