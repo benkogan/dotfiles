@@ -1,4 +1,10 @@
 
+#
+# .zshrc
+#
+# Ben Kogan <http://benkogan.com>
+#
+
 ###############################################################################
 ## Oh-My-ZSH Setup
 
@@ -6,7 +12,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="avit"
-plugins=(git osx brew colored-man)
+plugins=(git osx brew colored-man autojump)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -42,6 +48,29 @@ alias cp="cp -i"
 alias show_hidden="defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder"
 alias hide_hidden="defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder"
 
+# Git aliases
+# <https://gist.github.com/visionmedia/4998585>
+alias gd="git diff"
+alias gc="git clone"
+alias ga="git add"
+alias gbd="git branch -D"
+alias gst="git status"
+alias gca="git commit -a -m"
+alias gpt="git push --tags"
+alias gp="git push"
+alias gpr="git pull-request"
+alias grh="git reset --hard"
+alias gb="git branch"
+alias gcob="git checkout -b"
+alias gco="git checkout"
+alias gba="git branch -a"
+alias gcp="git cherry-pick"
+alias gl="git log --pretty='format:%Cgreen%h%Creset %an - %s' --graph"
+alias docs="rm -fr /tmp/docs && cp -fr docs /tmp/docs && git checkout gh-pages && cp -fr /tmp/docs/* ."
+alias gpom="git pull origin master"
+alias gcd='cd "`git rev-parse --show-toplevel`"'
+alias gdmb='git delete-merged-branches'
+
 
 ###############################################################################
 ## Path
@@ -62,22 +91,22 @@ if [ -d "/Users/Ben/scripts" ]; then
     PATH="/Users/Ben/scripts:$PATH"
 fi
 
+
 ###############################################################################
 ## Exports
 
-# Fix tmux colors (http://superuser.com/a/399326/247910)
+# Fix tmux colors
+# <http://superuser.com/a/399326/247910>
 export TERM=xterm-256color
 
 export EDITOR='vim'
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 
 ###############################################################################
 ## Add-Ons
 
-# Homeshick dotfiles manager setup
+# Homeshick: setup
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 # Homeshick: tab completion for ZSH
@@ -88,8 +117,4 @@ homeshick --quiet refresh
 
 # Hub: alias as git
 eval "$(hub alias -s)"
-
-# Autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
 

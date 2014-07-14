@@ -1,7 +1,6 @@
 #!usr/bin/env bash
 
 # Maintained by Ben Kogan, http://benkogan.com
-# Last updated 2014-02-16
 # ~/.osx — adapted from http://mths.be/osx
 
 # Ask for the administrator password upfront
@@ -10,7 +9,9 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-## GENERAL UI/UX ##############################################################
+
+###############################################################################
+## General UI/UX
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "bmk"
@@ -35,9 +36,12 @@ defaults write com.apple.systemuiserver menuExtras -array \
 file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns \
     [-e "${file}" ] && mv -f "${file}" "${file}.bak"
 
+# Sidebar icon size: small
+/usr/bin/defaults write -g 'NSTableViewDefaultSizeMode' -int 1
+
+
 ###############################################################################
-# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
-###############################################################################
+## Trackpad, mouse, keyboard, bluetooth accessories, and input
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -47,16 +51,16 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
+
 ###############################################################################
-# Screen                                                                      #
-###############################################################################
+# Screen
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
+
 ###############################################################################
 # Kill affected applications                                                  #
-###############################################################################
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
         "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
@@ -64,3 +68,4 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
         killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+

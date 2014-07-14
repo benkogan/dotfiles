@@ -1,39 +1,42 @@
-" Maintained by Ben Kogan
-" http://benkogan.com
+
+"
+" .vimrc
+"
+" Ben Kogan <http://benkogan.com>
+"
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL SETUP
 
 set nocompatible                " disable vi compatability mode
-set ruler		        " always show cursor position at window's bottom
+set ruler		        " always show cursor position at window bottom
 set laststatus=2                " always show status line
 set showcmd		        " display incomplete commands
 set incsearch                   " do incremental searching
-set autoindent                  " automatic indentation
-set noshowmode                  " hide insert status (-- INSERT --)
+set ignorecase                  " turn off case-sensitive search
+set smartcase                   " turn on case-sensitive search if uppercase
+set noshowmode                  " hide insert status
 set hlsearch                    " highlight last used search pattern
 set colorcolumn=80              " highlight 80th column
 set cursorline                  " highlight cursor line
 set number                      " show line numbers
 set hidden                      " buffers can be hidden without saving first
-set confirm                     " confirm if abandoning buf with unsaved changes
+set confirm                     " confirm abandoning a buf with unsaved changes
+set nofoldenable                " disable folding (re-enable with `zc`)
 set showmatch                   " show matching brackets under cursor...
 set mat=2                       " ...and blink every 2 tenths of a second
 set history=100		        " keep 100 lines of command line history
 set encoding=utf-8              " use utf-8 as standard encoding
-set backspace=indent,eol,start  " allow backspace over everything in insert mode
+set backspace=indent,eol,start  " allow bkspace over everything in insert mode
+set shell=/bin/bash             " shell as bash so fish doesn't break vim
 set viminfo+=n~/.vim/.viminfo   " store .viminfo in ~/.vim
 set display+=lastline           " display last line, even if cut off by bottom
 set background=dark             " use dark theme background
 set noeb vb t_vb=               " no beep, no flash for bell
 set t_Co=256                    " use 256 colors
 
-" Enable pathogen.vim
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
-filetype plugin indent on  " filetype detection and language-dependent indenting
+filetype plugin indent on  " detect filetype and language-dependent indent
 syntax on                  " enable syntax highlighting
 colorscheme solarized
 
@@ -51,30 +54,31 @@ if !&sidescrolloff
     set sidescrolloff=5
 endif
 
-let g:vim_markdown_folding_disabled=1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUG
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPPINGS
+call plug#begin()
+Plug 'scrooloose/syntastic'
+Plug 'edkolev/tmuxline.vim'
+Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'kien/ctrlp.vim'
+Plug 'dag/vim-fish'
+Plug 'junegunn/goyo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'digitaltoad/vim-jade'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-repeat'
+Plug 'honza/vim-snippets'
+Plug 'wavded/vim-stylus'
+Plug 'justinmk/vim-sneak'
+Plug 'garbas/vim-snipmate'
+  Plug 'tomtom/tlib_vim'
+  Plug 'MarcWeber/vim-addon-mw-utils'
+call plug#end()
 
-" Use jj to enter command mode
-:imap jj <Esc>
 
-
-" Use ; instead of : to enter commandline mode
-nore ; :
-nore , ;
-
-" Move through wrapped lines like normal lines
-nnoremap j gj
-nnoremap k gk
-
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 
 " tmuxline: section separators
@@ -100,16 +104,43 @@ let g:tmuxline_preset = {
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" vim-bufferline: don't highlight current buffer if it's the only buffer
-let g:bufferline_solo_highlight = 1
-let g:bufferline_active_highlight = 'StatusLine'
-let g:bufferline_fname_mod = ':p:~:.'
+" vim-airline: show buffers/tabs at top
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#buffer_min_count = 2
+
+" vim-sneak: clever-s
+let g:sneak#s_next = 1
 
 " Set gitgutter and syntastic gutter background to clear
 highlight clear SignColumn
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPPINGS
+
+" Use jj to enter command mode
+:imap jj <Esc>
+
+
+" Use ; instead of : to enter commandline mode
+nore ; :
+nore , ;
+
+" Move through wrapped lines like normal lines
+nnoremap j gj
+nnoremap k gk
+
+" Transpose characters
+nnoremap <silent> gc xph
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
 
 " Run :FixWhitespace to remove end of line white space
@@ -124,35 +155,29 @@ command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 iab <expr> dts strftime("%Y-%m-%d")
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TEXT, TABS, AND INDENTATION
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TEXT, TABS, INDENTATION, SPELL CHECK
 
-" Auto-indent by 4 spaces, a la K&R; change tab into spaces
+" Defaults
 set shiftwidth=4
 set expandtab
+set autoindent
 
-" Use tab character in makefiles and markdown
 autocmd FileType make,markdown setlocal noexpandtab
-
-" In text files, follow prev line indent, replace tab with spaces, softtab = 2
 autocmd FileType text setlocal autoindent expandtab softtabstop=2
+autocmd FileType javascript,html,css,sh,fish setlocal ts=2 sts=2 sw=2 et ai
+autocmd FileType markdown,text setlocal spell lbr cc=0 nocul
 
-autocmd FileType javascript,html,css,sh setlocal ts=2 sts=2 sw=2 expandtab autoindent
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUP
 
-" Keep a backup file
+" note: `~/.vim` and `~/.vim/backup` must already exist
+" note: `^=` prepends to target
+" note: `//` incorporates full path into swap file name
+
 set backup
-
-" Prepend ~/.vim/backup to backupdir
-" Vim will look for this dir before littering the current dir with backups
-" Do `mkdir ~/.vim/backup` for this to work
 set backupdir^=~/.vim/backup
-
-" Also use ~/.backup for swap files
-" Trailing // tells Vim to incorporate full path into swap file names.
 set dir^=~/.vim/backup//
 
 
