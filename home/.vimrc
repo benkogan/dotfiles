@@ -5,7 +5,6 @@
 " Ben Kogan <http://benkogan.com>
 "
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL SETUP
 
@@ -73,10 +72,10 @@ Plug 'honza/vim-snippets'
 Plug 'wavded/vim-stylus'
 Plug 'justinmk/vim-sneak'
 Plug 'garbas/vim-snipmate'
+  " Deps
   Plug 'tomtom/tlib_vim'
   Plug 'MarcWeber/vim-addon-mw-utils'
 call plug#end()
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -115,13 +114,11 @@ let g:sneak#s_next = 1
 " Set gitgutter and syntastic gutter background to clear
 highlight clear SignColumn
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPPINGS
 
 " Use jj to enter command mode
 :imap jj <Esc>
-
 
 " Use ; instead of : to enter commandline mode
 nore ; :
@@ -139,7 +136,6 @@ if maparg('<C-L>', 'n') ==# ''
     nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
 
@@ -154,7 +150,6 @@ command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 " Type `dts` to expand to date
 iab <expr> dts strftime("%Y-%m-%d")
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXT, TABS, INDENTATION, SPELL CHECK
 
@@ -168,7 +163,6 @@ autocmd FileType text setlocal autoindent expandtab softtabstop=2
 autocmd FileType javascript,html,css,sh,fish setlocal ts=2 sts=2 sw=2 et ai
 autocmd FileType markdown,text setlocal spell lbr cc=0 nocul
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUP
 
@@ -179,5 +173,4 @@ autocmd FileType markdown,text setlocal spell lbr cc=0 nocul
 set backup
 set backupdir^=~/.vim/backup
 set dir^=~/.vim/backup//
-
 
