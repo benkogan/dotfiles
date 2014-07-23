@@ -6,9 +6,10 @@
 #
 
 set -x EDITOR vim
+set -x TERM xterm-256color
 eval (hub alias -s)
-source /usr/local/Cellar/autojump/HEAD/etc/autojump.fish
-source $HOME/.homesick/repos/homeshick/homeshick.fish
+. /usr/local/Cellar/autojump/HEAD/etc/autojump.fish
+. $HOME/.homesick/repos/homeshick/homeshick.fish
 
 alias c clear
 alias e $EDITOR

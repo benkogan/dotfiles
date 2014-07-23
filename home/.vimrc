@@ -25,6 +25,7 @@ set confirm                     " confirm abandoning a buf with unsaved changes
 set nofoldenable                " disable folding (re-enable with `zc`)
 set showmatch                   " show matching brackets under cursor...
 set mat=2                       " ...and blink every 2 tenths of a second
+set mouse=a                     " enable mouse in all modes
 set history=100		        " keep 100 lines of command line history
 set encoding=utf-8              " use utf-8 as standard encoding
 set backspace=indent,eol,start  " allow bkspace over everything in insert mode
