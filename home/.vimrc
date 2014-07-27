@@ -155,13 +155,12 @@ iab <expr> dts strftime("%Y-%m-%d")
 " TEXT, TABS, INDENTATION, SPELL CHECK
 
 " Defaults
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 set autoindent
 
-autocmd FileType make,markdown setlocal noexpandtab
-autocmd FileType text setlocal autoindent expandtab softtabstop=2
-autocmd FileType javascript,html,css,sh,fish setlocal ts=2 sts=2 sw=2 et ai
+autocmd FileType c setlocal sw=4
+autocmd FileType make,markdown setlocal noexpandtab sw=4
 autocmd FileType markdown,text setlocal spell lbr cc=0 nocul
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
