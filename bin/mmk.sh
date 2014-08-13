@@ -7,8 +7,6 @@
 # Ben Kogan <http://benkogan.com>
 #
 
-#    Usage:    mmk [original kernel version (e.g. 3.10.34)] [columbia uni]
-
 if [ -z "$1" ]; then # quit if no arguments
     echo ""
     echo "  Usage: $0 [original kernel version] [columbia uni]"
