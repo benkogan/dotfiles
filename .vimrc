@@ -97,8 +97,8 @@ let g:tmuxline_preset = {
     \'win'   : '#I:#W',
     \'cwin'  : '#I:#W',
     \ 'x'    : '#(weather -c)',
-    \ 'y'    : '%I:%M · %a · #(date +"%y-%m-%d") · #(~/scripts/battery.sh)%%',
-    \ 'z'    : '#h'}
+    \ 'y'    : '%I:%M · %a · #(date +"%y-%m-%d")',
+    \ 'z'    : '#(~/bin/battery.sh)%%'}
 
 " vim-airline: section seperators
 let g:airline_left_sep=''
@@ -156,6 +156,7 @@ iab <expr> dts strftime("%Y-%m-%d")
 
 " Defaults
 set shiftwidth=2
+set tabstop=2
 set expandtab
 set autoindent
 
