@@ -1,6 +1,13 @@
 
 # VIM-HELP
 
+## Indentation
+
+  While in insert mode:
+
+	C-t    :: indent current line forwards
+	C-d    :: indent current line backwards
+
 ## System clipboard support
 
   Get system pasteboard support on OS X (pseudo-code):

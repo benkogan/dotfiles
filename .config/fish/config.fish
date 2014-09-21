@@ -7,7 +7,7 @@
 
 set -x EDITOR vim
 set -x TERM xterm-256color
-# set -x PATH ~/.cabal/bin $PATH
+
 . /usr/local/Cellar/autojump/HEAD/etc/autojump.fish
 . $HOME/.homesick/repos/homeshick/homeshick.fish
 

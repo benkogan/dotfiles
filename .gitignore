@@ -1,5 +1,6 @@
 
 /.atom
+/.bash_history
 /.bundler
 /.cache
 /.CFUserTextEncoding
@@ -35,6 +36,7 @@
 /.vim/tags
 
 /Books
+/Classes
 /Clippings
 /Desktop
 /Documents
@@ -45,9 +47,10 @@
 /Pictures
 /Projects
 /Public
+/Resume
+/Text
 /Tunity
 /Virtual
 /Work
 /clone
-/tmp
 

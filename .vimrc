@@ -9,50 +9,46 @@
 " GENERAL SETUP
 
 set nocompatible                " disable vi compatability mode
-set ruler		        " always show cursor position at window bottom
-set laststatus=2                " always show status line
-set showcmd		        " display incomplete commands
+set ruler		                    " show cursor position at window bottom
+set showcmd		                  " display incomplete commands
 set incsearch                   " do incremental searching
 set ignorecase                  " turn off case-sensitive search
 set smartcase                   " turn on case-sensitive search if uppercase
+set ttyfast                     " Optimize for fast terminal connections
+set wildmenu                    " enhance command-line completion
 set noshowmode                  " hide insert status
 set hlsearch                    " highlight last used search pattern
-set colorcolumn=80              " highlight 80th column
 set cursorline                  " highlight cursor line
 set number                      " show line numbers
 set hidden                      " buffers can be hidden without saving first
 set confirm                     " confirm abandoning a buf with unsaved changes
 set nofoldenable                " disable folding (re-enable with `zc`)
+set autoread                    " reload file if changed outside of vim
 set showmatch                   " show matching brackets under cursor...
 set mat=2                       " ...and blink every 2 tenths of a second
 set mouse=a                     " enable mouse in all modes
-set history=100		        " keep 100 lines of command line history
+set t_Co=256                    " use 256 colors
+set scrolloff=1                 " scroll to one line before bottom border
+set laststatus=2                " always show status line
+set history=100		              " keep 100 lines of command line history
+set colorcolumn=80              " highlight 80th column
 set encoding=utf-8              " use utf-8 as standard encoding
-set backspace=indent,eol,start  " allow bkspace over everything in insert mode
+set background=dark             " use dark theme background
 set shell=/bin/bash             " shell as bash so fish doesn't break vim
+set backspace=indent,eol,start  " allow bkspace over everything in insert mode
 set viminfo+=n~/.vim/.viminfo   " store .viminfo in ~/.vim
 set display+=lastline           " display last line, even if cut off by bottom
-set background=dark             " use dark theme background
 set noeb vb t_vb=               " no beep, no flash for bell
-set t_Co=256                    " use 256 colors
 
-filetype plugin indent on  " detect filetype and language-dependent indent
-syntax on                  " enable syntax highlighting
-colorscheme solarized
+filetype plugin indent on       " detect filetype and language-dependent indent
+syntax on                       " enable syntax highlighting
+colorscheme solarized           " color scheme
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-
-" Limit how close to window edge cursor can scroll
-if !&scrolloff
-    set scrolloff=1
-endif
-if !&sidescrolloff
-    set sidescrolloff=5
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUG
@@ -80,25 +76,6 @@ call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
-
-" tmuxline: section separators
-let g:tmuxline_separators = {
-    \ 'left'      : '',
-    \ 'left_alt'  : '',
-    \ 'right'     : '',
-    \ 'right_alt' : '',
-    \ 'space'     : ' '}
-
-" tmuxline: section contents
-let g:tmuxline_preset = {
-    \ 'a'    : 'SESSION #S',
-    \ 'b'    : '',
-    \ 'c'    : '',
-    \'win'   : '#I:#W',
-    \'cwin'  : '#I:#W',
-    \ 'x'    : '#(weather -c)',
-    \ 'y'    : '%I:%M · %a · #(date +"%y-%m-%d")',
-    \ 'z'    : '#(~/bin/battery.sh)%%'}
 
 " vim-airline: section seperators
 let g:airline_left_sep=''
@@ -138,15 +115,52 @@ if maparg('<C-L>', 'n') ==# ''
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FUNCTIONS
+" LEADER COMMANDS
 
-" Run :FixWhitespace to remove end of line white space
+" Use `,` as leader key
+let mapleader=","
+
+" Create setext headings with `h1` and `h2`
+map <leader>h1 VypVr=
+map <leader>h2 VypVr-
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FUNCTIONS & COMMANDS
+
+" Run `:FixWhitespace` to remove end of line white space
 function! s:FixWhitespace(line1,line2)
     let l:save_cursor = getpos(".")
     silent! execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//'
     call setpos('.', l:save_cursor)
 endfunction
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
+
+" Run `:RemoveFancyCharacters` to remove smart quotes, etc.
+function! RemoveFancyCharacters()
+  let typo = {}
+  let typo["“"] = '"'
+  let typo["”"] = '"'
+  let typo["‘"] = "'"
+  let typo["’"] = "'"
+  let typo["–"] = '--'
+  let typo["—"] = '---'
+  let typo["…"] = '...'
+  :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+endfunction
+command! RemoveFancyCharacters :call RemoveFancyCharacters()
+
+" Run `:RenameFile` to rename current buffer file
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+command! RenameFile :call RenameFile()
+" map <leader>n :call RenameFile()<cr>
 
 " Type `dts` to expand to date
 iab <expr> dts strftime("%Y-%m-%d")
@@ -160,9 +174,8 @@ set tabstop=2
 set expandtab
 set autoindent
 
-autocmd FileType c setlocal sw=4
-autocmd FileType make,markdown setlocal noexpandtab sw=4
-autocmd FileType markdown,text setlocal spell lbr cc=0 nocul
+autocmd FileType make,markdown setlocal noexpandtab sw=4 ts=4
+autocmd FileType markdown,text setlocal spell bri lbr cc=0 nocul
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUP

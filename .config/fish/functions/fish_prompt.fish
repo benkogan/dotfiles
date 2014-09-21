@@ -1,23 +1,37 @@
 
-set fish_git_dirty_color red
-set fish_git_not_dirty_color green
-
 function parse_git_branch
   set -l branch (git branch ^ /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
   set -l git_diff (git diff)
 
   if test -n "$git_diff"
-    echo (set_color $fish_git_dirty_color)$branch(set_color normal)
+    echo (set_color red)$branch(set_color normal)
   else
-    echo (set_color $fish_git_not_dirty_color)$branch(set_color normal)
+    echo $branch
   end
 end
 
-function fish_prompt
-  if test -d .git
-    printf '%s@%s %s%s%s:%s> ' (whoami) (hostname|cut -d . -f 1) (set_color $fish_color_cwd) (prompt_pwd) (set_color normal) (parse_git_branch)
+function exit_status_icon
+  set -l icon λ
+
+  if test $status -gt 0
+    echo (set_color red)$icon(set_color normal)
   else
-    printf '%s@%s %s%s%s> ' (whoami) (hostname|cut -d . -f 1) (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
+    echo $icon
+  end
+end
+
+function colored_cwd
+  set -l cwd (prompt_pwd)
+  echo (set_color $fish_color_cwd)$cwd(set_color normal)
+end
+
+function fish_prompt
+  set -l icon (exit_status_icon)
+
+  if test -d .git
+    printf '%s %s (%s): ' $icon (colored_cwd) (parse_git_branch)
+  else
+    printf '%s %s: ' $icon (colored_cwd)
   end
 end
 
