@@ -9,8 +9,8 @@
 " GENERAL SETUP
 
 set nocompatible                " disable vi compatability mode
-set ruler		                    " show cursor position at window bottom
-set showcmd		                  " display incomplete commands
+set ruler                       " show cursor position at window bottom
+set showcmd                     " display incomplete commands
 set incsearch                   " do incremental searching
 set ignorecase                  " turn off case-sensitive search
 set smartcase                   " turn on case-sensitive search if uppercase
@@ -30,7 +30,7 @@ set mouse=a                     " enable mouse in all modes
 set t_Co=256                    " use 256 colors
 set scrolloff=1                 " scroll to one line before bottom border
 set laststatus=2                " always show status line
-set history=100		              " keep 100 lines of command line history
+set history=100                 " keep 100 lines of command line history
 set colorcolumn=80              " highlight 80th column
 set encoding=utf-8              " use utf-8 as standard encoding
 set background=dark             " use dark theme background
