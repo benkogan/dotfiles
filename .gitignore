@@ -1,32 +1,61 @@
 
-/.atom
+# Unwanted dotfiles
+
 /.bash_history
 /.bundler
 /.cache
 /.CFUserTextEncoding
 /.gem
 /.ghc
-/.heroku
-/.httpie
 /.lesshst
 /.local
-/.netrc
 /.node-gyp
 /.npm
-/.pip
 /.ssh
 /.Trash
+
+# (Later additions to sort)
+
+.bash_profile
+.bashrc
+.cups/
+.gnupg/
+.irb_history
+.irbrc
+.mkshrc
+.mysql_history
+.profile
+.psql_history
+.rvm/
+.sandbox/
+.sqlite_history
+.subversion/
+.zlogin
+.zshrc
+
+# From ~/.cabal, keep only config file
+
+.cabal/*
+!/.cabal/config
+
+# Unwanted config files
 
 /.config/configstore
 /.config/fish/fish*
 /.config/fish/gen*
 /.config/git
-/.config/hub
-/.config/learnyounode
+
+# (May want to track later)
+
+/.config/mdp
+
+# Vim folders to keep
 
 !/.vim/backup/.gitkeep
 !/.vim/plugged/.gitkeep
 !/.vim/spell/.gitkeep
+
+# Unwated vim files
 
 /.vim/.netrwhist
 /.vim/.viminfo
@@ -35,8 +64,8 @@
 /.vim/spell/*
 /.vim/tags
 
-/Books
-/Classes
+# User data
+
 /Clippings
 /Desktop
 /Documents
@@ -47,10 +76,12 @@
 /Pictures
 /Projects
 /Public
-/Resume
+/Reading
+/Sketches
 /Text
-/Tunity
-/Virtual
 /Work
-/clone
+
+# Binaries and scripts
+
+/bin
 

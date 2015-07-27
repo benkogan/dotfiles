@@ -4,14 +4,14 @@ function parse_git_branch
   set -l git_diff (git diff)
 
   if test -n "$git_diff"
-    echo (set_color red)$branch(set_color normal)
-  else
     echo $branch
+  else
+    echo (set_color green)$branch(set_color normal)
   end
 end
 
 function exit_status_icon
-  set -l icon λ
+  set -l icon ' '
 
   if test $status -gt 0
     echo (set_color red)$icon(set_color normal)
@@ -29,7 +29,7 @@ function fish_prompt
   set -l icon (exit_status_icon)
 
   if test -d .git
-    printf '%s %s (%s): ' $icon (colored_cwd) (parse_git_branch)
+    printf '%s %s %s: ' $icon (colored_cwd) (parse_git_branch)
   else
     printf '%s %s: ' $icon (colored_cwd)
   end
