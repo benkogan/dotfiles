@@ -11,12 +11,12 @@ function parse_git_branch
 end
 
 function exit_status_icon
-  set -l icon ' '
+  set -l icon '·'
 
   if test $status -gt 0
     echo (set_color red)$icon(set_color normal)
   else
-    echo $icon
+    echo ' '
   end
 end
 

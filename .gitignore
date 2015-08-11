@@ -16,6 +16,7 @@
 
 # (Later additions to sort)
 
+.account
 .bash_profile
 .bashrc
 .cups/
@@ -32,6 +33,8 @@
 .subversion/
 .zlogin
 .zshrc
+.passwords
+.sicksync-config.json
 
 # From ~/.cabal, keep only config file
 
