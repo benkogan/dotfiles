@@ -1,45 +1,44 @@
 
 # Unwanted dotfiles
 
+/.autoenvtoken
 /.bash_history
 /.bundler
 /.cache
 /.CFUserTextEncoding
+/.fireglass
 /.gem
-/.ghc
+/.ivy2
 /.lesshst
 /.local
 /.node-gyp
 /.npm
+/.oracle_jre_usage
+/.sbt
 /.ssh
 /.Trash
+/.*_history
 
 # (Later additions to sort)
+
+/.cabal
+/.ghc
+/.sandbox
 
 .account
 .bash_profile
 .bashrc
-.cups/
-.gnupg/
-.irb_history
+.cups
+.gnupg
 .irbrc
 .mkshrc
-.mysql_history
 .profile
-.psql_history
-.rvm/
-.sandbox/
-.sqlite_history
-.subversion/
+.rvm
+.subversion
 .zlogin
 .zshrc
 .passwords
-.sicksync-config.json
-
-# From ~/.cabal, keep only config file
-
-.cabal/*
-!/.cabal/config
+.v8flags*
 
 # Unwanted config files
 
@@ -69,6 +68,7 @@
 
 # User data
 
+/Applications
 /Clippings
 /Desktop
 /Documents
@@ -76,6 +76,7 @@
 /Library/*
 /Movies
 /Music
+/Personal
 /Pictures
 /Projects
 /Public
@@ -83,8 +84,4 @@
 /Sketches
 /Text
 /Work
-
-# Binaries and scripts
-
-/bin
 

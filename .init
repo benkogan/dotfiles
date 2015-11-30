@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# TODO help/status/usage messages etc
+# TODO log / fail fn like mmk?
+# TODO xcode tools
+# TODO actually move dotfiles and git repo
+# TODO this should be in repo root. check on startup and fail if not?
+
+set -e
+
+exists () {
+  type $1 2> /dev/null
+}
+
+prompt () {
+  while true; do
+    echo
+    read -p "$@ (yes/no) " answer
+    case $answer in
+      yes) return 0;;
+      no) return 1;;
+      *) echo "Please answer yes or no.";;
+    esac
+  done
+}
+
+copyToHome () {
+  local item="$1"
+  local gb="\e[1;34m"
+  local ge="\e[0m"
+  if test -e ~/$item; then
+    if prompt "$gb~/${item}$ge already exists; would you like to overwrite it?"; then
+      echo YES
+    else
+      echo NO
+    fi
+  else
+    echo "Copying \"${item}\" to ~/${item}"
+    cp $item ~/$item
+  fi
+}
+
+if test $(uname -s) == 'Darwin'; then
+
+  if ! exists brew 1> /dev/null; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  ## TODO check for existence first
+  #brew install autojump fish node python vim haskell-stack # git
+
+  ## TODO check for existence first
+  #npm install --global spot
+
+  #if ! grep fish /etc/shells; then
+  #  sudo bash -c "echo /usr/local/bin/fish >> /etc/shells"
+  #  chsh -s /usr/local/bin/fish
+  #fi
+
+  for item in *; do
+    copyToHome $item
+  done
+
+fi
+
+echo done
+

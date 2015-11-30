@@ -19,6 +19,7 @@ abbr -a rm 'rm -i'
 abbr -a mv 'mv -i'
 
 abbr -a gp  'git push'
+abbr -a gb  'git branch'
 abbr -a gl  'git log --color | less -r'
 abbr -a gdh 'git diff --color HEAD | less -r'
 abbr -a gst 'git status'
