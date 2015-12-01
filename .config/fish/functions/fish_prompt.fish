@@ -1,37 +1,41 @@
 
-function parse_git_branch
-  set -l branch (git branch ^ /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
-  set -l git_diff (git diff)
-
-  if test -n "$git_diff"
-    echo $branch
-  else
-    echo (set_color green)$branch(set_color normal)
-  end
+function fish_prompt
+  printf '%s %s %s: ' (exit_status_icon $status) (colored_cwd) (parse_git_branch)
 end
 
 function exit_status_icon
-  set -l icon '·'
-
-  if test $status -gt 0
-    echo (set_color red)$icon(set_color normal)
+  if test $argv[1] -gt 0
+    printf '%s%s%s' (set_color red) (status_icon) (set_color normal)
   else
-    echo ' '
+    printf '%s' (no_status_icon)
   end
+end
+
+function status_icon
+  printf '·'
+end
+
+function no_status_icon
+  printf ' '
 end
 
 function colored_cwd
-  set -l cwd (prompt_pwd)
-  echo (set_color $fish_color_cwd)$cwd(set_color normal)
+  printf '%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
 end
 
-function fish_prompt
-  set -l icon (exit_status_icon)
-
-  if test -d .git
-    printf '%s %s %s: ' $icon (colored_cwd) (parse_git_branch)
+function parse_git_branch
+  if test -n (git_diff)
+    current_git_branch
   else
-    printf '%s %s: ' $icon (colored_cwd)
+    printf '%s%s%s' (set_color green) (current_git_branch) (set_color normal)
   end
+end
+
+function git_diff
+  printf '%s' (git diff)
+end
+
+function current_git_branch
+  git branch ^ /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/'
 end
 
