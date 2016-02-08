@@ -63,6 +63,7 @@ Plug 'dag/vim-fish'
 Plug 'raichoo/haskell-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'derekwyatt/vim-scala'
+Plug 'groenewege/vim-less'
 call plug#end()
 
 " vim-airline: default theme
