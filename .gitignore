@@ -4,6 +4,7 @@
 /.autoenvtoken
 /.bash_history
 /.bundler
+/.babel.json
 /.cache
 /.CFUserTextEncoding
 /.fireglass
@@ -13,6 +14,8 @@
 /.local
 /.node-gyp
 /.npm
+/.npmrc
+/.maestrotoken
 /.oracle_jre_usage
 /.sbt
 /.ssh

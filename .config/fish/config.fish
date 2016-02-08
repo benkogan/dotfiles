@@ -10,7 +10,7 @@ source ~/.config/fish/environment/*
 set -l j /usr/local/share/autojump/autojump.fish
 if test -f $j; source $j; end
 
-alias e $EDITOR
+abbr -a e 'vim'
 
 abbr -a c  'clear'
 abbr -a l  'ls -lah'
@@ -20,6 +20,7 @@ abbr -a mv 'mv -i'
 
 abbr -a ga  'git add'
 abbr -a gp  'git push'
+abbr -a gu  'git pull'
 abbr -a gc  'git clone'
 abbr -a gb  'git branch'
 abbr -a gl  'git log --color | less -r'
@@ -34,12 +35,20 @@ abbr -a se 'stack exec'
 abbr -a sb 'stack build'
 abbr -a si 'stack ghci'
 
-abbr -a vimrc  'e ~/.vimrc'
-abbr -a fishrc 'e ~/.config/fish/config.fish'
+abbr -a vimrc  'eval $EDITOR ~/.vimrc'
+abbr -a fishrc 'eval $EDITOR ~/.config/fish/config.fish'
+abbr -a prompt 'eval $EDITOR ~/.config/fish/functions/fish_prompt.fish'
+
 
 function battery
-  ioreg -n AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.2f%%"; max=c["\"MaxCapacity\""]; printf("%d%%", max>0? 100*c["\"CurrentCapacity\""]/max: "?")}'
-  echo ''
+  set -l x (which ioreg)
+
+  if test -z x
+    echo '---'
+  else
+    ioreg -n AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.2f%%"; max=c["\"MaxCapacity\""]; printf("%d%%", max>0? 100*c["\"CurrentCapacity\""]/max: "?")}'
+    echo
+  end
 end
 
 function cl
