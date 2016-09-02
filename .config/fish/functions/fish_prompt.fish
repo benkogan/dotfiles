@@ -1,41 +1,57 @@
+set -g fish_color_git_clean green
+set -g fish_color_git_staged yellow
+set -g fish_color_git_dirty red
+
+set -g fish_color_git_added green
+set -g fish_color_git_modified blue
+set -g fish_color_git_renamed magenta
+set -g fish_color_git_copied magenta
+set -g fish_color_git_deleted red
+set -g fish_color_git_untracked yellow
+set -g fish_color_git_unmerged red
+
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showupstream 'yes'
 
 function fish_prompt
-  printf '%s %s %s: ' (exit_status_icon $status) (colored_cwd) (parse_git_branch)
+  set --local exit_status $status
+  printf '%s%s%s%s: ' (colored_cwd) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
 end
 
-function exit_status_icon
-  if test $argv[1] -gt 0
-    printf '%s%s%s' (set_color red) (status_icon) (set_color normal)
-  else
-    printf '%s' (no_status_icon)
+function p
+  set --local str "$argv[1]"
+  if test -n $str
+    printf ' %s' $str
   end
-end
-
-function status_icon
-  printf '·'
-end
-
-function no_status_icon
-  printf ' '
 end
 
 function colored_cwd
-  printf '%s%s%s' (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
+  printf (in_color $fish_color_cwd (prompt_pwd))
 end
 
-function parse_git_branch
-  if test -n (git_diff)
-    current_git_branch
-  else
-    printf '%s%s%s' (set_color green) (current_git_branch) (set_color normal)
+function git_info
+  __fish_git_prompt '%s'
+end
+
+function time_if_long
+  if test $CMD_DURATION
+    if test $CMD_DURATION -gt 5000
+      printf (in_color yellow (math $CMD_DURATION / 1000)"s")
+    end
   end
 end
 
-function git_diff
-  printf '%s' (git diff)
+function error_if_error
+  set --local exit_status $argv[1]
+  if test $exit_status -gt 0
+    printf (in_color red x)
+  end
 end
 
-function current_git_branch
-  git branch ^ /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/'
+function in_color
+  set --local color "$argv[1]"
+  set --local message "$argv[2]"
+  printf '%s%s%s' (set_color $color) "$message" (set_color normal)
 end
-

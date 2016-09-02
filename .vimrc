@@ -38,7 +38,7 @@ set noeb vb t_vb=               " no beep, no flash for bell
 
 filetype plugin indent on       " detect filetype and lang-dependent indent
 syntax on                       " enable syntax highlighting
-colorscheme bmk                 " color scheme
+colorscheme PaperColor          " color scheme
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -54,35 +54,36 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak'
-Plug 'junegunn/goyo.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'dag/vim-fish'
 Plug 'raichoo/haskell-vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'derekwyatt/vim-scala'
 Plug 'groenewege/vim-less'
+Plug 'pangloss/vim-javascript'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/paredit.vim'
 call plug#end()
 
-" vim-airline: default theme
 let g:airline_theme = 'lucius'
-
-" vim-airline: section seperators
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-
-" vim-airline: show buffers/tabs at top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_min_count = 2
-
-" vim-sneak: clever-s
 let g:sneak#s_next = 1
-
-" gitgutter: turn off signs by default
 let g:gitgutter_signs = 0
+let g:ctrlp_working_path_mode = 'ra'
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh', 'javascript']
+let g:clojure_align_multiline_strings = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
+" ctrlp: ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Set gitgutter and syntastic gutter background to clear
 highlight clear SignColumn
