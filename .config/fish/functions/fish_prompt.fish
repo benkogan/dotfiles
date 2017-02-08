@@ -17,7 +17,7 @@ set __fish_git_prompt_showupstream 'yes'
 
 function fish_prompt
   set --local exit_status $status
-  printf '%s%s%s%s: ' (colored_cwd) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  printf '%s%s%s%s%s%s: ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
 end
 
 function p
@@ -27,8 +27,22 @@ function p
   end
 end
 
+function curr_host
+  set --local current_host (hostname)
+  if test $current_host = 'bkogan'
+    printf (in_color green '⌂')
+  else
+    printf (in_color green $current_host)
+  end
+end
+
 function colored_cwd
   printf (in_color $fish_color_cwd (prompt_pwd))
+end
+
+function git_user
+  # sed: cut between @ and .com, inc/exclusive
+  printf (in_color blue (git config user.email | sed 's/^..*\(@..*\)\.com$/\1/'))
 end
 
 function git_info
