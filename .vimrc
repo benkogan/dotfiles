@@ -49,7 +49,8 @@ autocmd BufReadPost *
 " PLUGINS
 
 call plug#begin()
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak'

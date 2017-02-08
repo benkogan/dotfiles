@@ -32,7 +32,7 @@ function curr_host
   if test $current_host = 'bkogan'
     printf (in_color green '⌂')
   else
-    printf (in_color green $current_host)
+    printf (in_color green '⦰')
   end
 end
 
