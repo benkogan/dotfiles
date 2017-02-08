@@ -36,6 +36,9 @@ set viminfo+=n~/.vim/.viminfo   " store .viminfo in ~/.vim
 set display+=lastline           " display last line, even if cut off by bottom
 set noeb vb t_vb=               " no beep, no flash for bell
 
+set list
+set listchars=tab:>-
+
 filetype plugin indent on       " detect filetype and lang-dependent indent
 syntax on                       " enable syntax highlighting
 colorscheme PaperColor          " color scheme
@@ -66,7 +69,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/paredit.vim'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:airline_theme = 'lucius'
@@ -163,17 +167,10 @@ iab <expr> dts strftime("%Y-%m-%d")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXT, TABS, INDENTATION, SPELL CHECK
 
-" Defaults
-set shiftwidth=2
-set tabstop=2
-set expandtab
 set autoindent
-
 set spellfile=~/.vim/spell/en.utf-8.add
 
-autocmd FileType markdown,make setlocal sw=4 ts=4 noexpandtab
 autocmd FileType markdown,text setlocal cc=0 spell nocul lbr
-autocmd FileType python setlocal sw=4 ts=4 colorcolumn=0
 
 " List continuation and indentation for markdown
 autocmd FileType markdown setlocal

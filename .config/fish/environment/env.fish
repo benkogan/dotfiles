@@ -1,7 +1,4 @@
-
-#
 # assorted environment variables
-#
 
 set -x EDITOR vim
 set -x TERM xterm-256color
@@ -15,4 +12,3 @@ for dir in '~/bin' '/usr/texbin'
     set -x fish_user_paths $fish_user_paths $dir
   end
 end
-

@@ -1,7 +1,4 @@
-
-#
 # colored man pages for fish shell
-#
 
 # begin blinking
 set -x LESS_TERMCAP_mb \e'[01;31m'
@@ -23,4 +20,3 @@ set -x LESS_TERMCAP_ue \e'[0m'
 
 # begin underline
 set -x LESS_TERMCAP_us \e'[04;38;5;146m'
-

@@ -20,6 +20,7 @@
 /.config/nvim
 /.cups
 /.fireglass
+/.gdbinit
 /.gem
 /.ghc
 /.gnupg
@@ -42,6 +43,7 @@
 /.rvm
 /.sandbox
 /.sbt
+/.slocdata
 /.ssh
 /.stack
 /.subversion
@@ -52,6 +54,7 @@
 /.vim/plugged/*
 /.vim/spell/*
 /.vim/tags
+/.yjp
 /.zlogin
 /.zshrc
 /Applications
@@ -63,11 +66,16 @@
 /Library/*
 /Movies
 /Music
+/Notes
+/Onboarding
 /Personal
 /Pictures
 /Projects
 /Public
 /Reading
+/Repos
+/Resources
+/Talks
 /Sketches
 /Text
 /Work
@@ -75,3 +83,5 @@
 !/.vim/backup/.gitkeep
 !/.vim/plugged/.gitkeep
 !/.vim/spell/.gitkeep
+
+*\.private\.*
