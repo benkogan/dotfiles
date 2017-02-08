@@ -7,12 +7,6 @@ end
 set -l j /usr/local/share/autojump/autojump.fish
 if test -f $j; source $j; end
 
-function cl
-  clear
-  ls -Ahl
-  echo
-end
-
 function dl
   cd $argv[1]
   cl

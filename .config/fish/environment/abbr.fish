@@ -2,6 +2,8 @@ abbr -a e 'vim'
 
 abbr -a c  'clear'
 abbr -a l  'ls -lah'
+abbr -a cl 'clear; and ls -Ahl'
+abbr -a ck 'clear; and ls -hl'
 abbr -a cp 'cp -i'
 abbr -a rm 'rm -i'
 abbr -a mv 'mv -i'
