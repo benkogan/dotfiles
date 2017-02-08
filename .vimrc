@@ -1,9 +1,4 @@
-
-"
-" .vimrc
-"
 " Ben Kogan <http://benkogan.com>
-"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL SETUP
@@ -38,6 +33,7 @@ set noeb vb t_vb=               " no beep, no flash for bell
 
 set list
 set listchars=tab:>-
+set cursorline
 
 filetype plugin indent on       " detect filetype and lang-dependent indent
 syntax on                       " enable syntax highlighting
