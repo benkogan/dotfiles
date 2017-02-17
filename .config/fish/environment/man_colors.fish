@@ -13,7 +13,8 @@ set -x LESS_TERMCAP_me \e'[0m'
 set -x LESS_TERMCAP_se \e'[0m'
 
 # begin standout-mode - info box
-set -x LESS_TERMCAP_so \e'[38;5;246m'
+#set -x LESS_TERMCAP_so \e'[38;5;246m'
+set -x LESS_TERMCAP_so (tput bold; tput setaf 2)
 
 # end underline
 set -x LESS_TERMCAP_ue \e'[0m'
