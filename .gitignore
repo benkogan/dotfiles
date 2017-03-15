@@ -24,6 +24,7 @@
 /.gem
 /.ghc
 /.gnupg
+/.grip
 /.idea-build/
 /.ideavimrc
 /.irbrc
