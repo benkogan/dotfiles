@@ -62,9 +62,9 @@ function git_info
     set --local branch (git branch | grep \* | cut -d ' ' -f2)
     set --local s (git status --porcelain)
     if test -n "$s"
-      printf "%s%s%s" "$home_char" (in_color blue "$branch") "$stash_char"
-    else
       printf "%s%s%s" "$home_char" "$branch" "$stash_char"
+    else
+      printf "%s%s%s" "$home_char" (in_color blue "$branch") "$stash_char"
     end
   end
 end

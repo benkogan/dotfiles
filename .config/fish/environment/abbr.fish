@@ -10,7 +10,7 @@ abbr -a mv 'mv -i'
 
 abbr -a ga  'git add'
 abbr -a gp  'git push'
-abbr -a gu  'git pull'
+abbr -a gf  'git fetch'
 abbr -a gc  'git clone'
 abbr -a gb  'git branch'
 abbr -a gl  'git log --color | less -r'
