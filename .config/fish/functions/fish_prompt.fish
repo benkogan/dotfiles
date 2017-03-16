@@ -17,7 +17,7 @@ set __fish_git_prompt_showupstream 'yes'
 
 function fish_prompt
   set --local exit_status $status
-  printf '%s%s%s%s%s%s: ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  printf '%s%s%s%s%s%s> ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
 end
 
 function p
@@ -29,7 +29,7 @@ end
 
 function curr_host
   set --local current_host (hostname)
-  if test $current_host = 'bkogan'
+  if test $current_host = 'bkogan' -o (echo $current_host | cut -f1 -d ".") = 'Bens-MacBook'
     printf (in_color green '⌂')
   else
     printf (in_color green '⦰')
@@ -46,7 +46,27 @@ function git_user
 end
 
 function git_info
-  __fish_git_prompt '%s'
+  set --local git_root (git rev-parse --show-toplevel 2>/dev/null)
+  if test -n "$git_root"
+    set --local sl (git stash list)
+    set --local stash_char ''
+    if test -n "$sl"
+      set stash_char '*'
+    end
+
+    set --local home_char ''
+    if test "$git_root" = '/Users/Ben'
+      set home_char '·'
+    end
+
+    set --local branch (git branch | grep \* | cut -d ' ' -f2)
+    set --local s (git status --porcelain)
+    if test -n "$s"
+      printf "%s%s%s" "$home_char" (in_color blue "$branch") "$stash_char"
+    else
+      printf "%s%s%s" "$home_char" "$branch" "$stash_char"
+    end
+  end
 end
 
 function time_if_long

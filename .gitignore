@@ -5,16 +5,13 @@
 /.atom/
 /.autoenvtoken
 /.babel.json
-/.bash_history
-/.bash_profile
-/.bashrc
+/.bash*
 /.bundler
 /.cabal
 /.cache
 /.config/configstore
 /.config/ensime-vim
-/.config/fish/fish*
-/.config/fish/gen*
+/.config/fish/fishd*
 /.config/git
 /.config/mdp
 /.config/nvim
@@ -34,14 +31,14 @@
 /.m2
 /.maestrotoken
 /.mkshrc
+/.mongorc.js
 /.node-gyp
 /.npm
 /.npmrc
 /.oracle_jre_usage
 /.passwords
 /.profile
-/.rvm
-/.sandbox
+/.rvm /.sandbox
 /.sbt
 /.slocdata
 /.ssh
@@ -68,6 +65,7 @@
 /Music
 /Notes
 /Onboarding
+/Organize
 /Personal
 /Pictures
 /Projects
