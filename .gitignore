@@ -13,10 +13,12 @@
 /.cache
 /.config/configstore
 /.config/ensime-vim
-/.config/fish/fishd*
+/.config/fish/fish*
 /.config/git
+/.config/htop
 /.config/mdp
 /.config/nvim
+/.cshrc
 /.cups
 /.fireglass
 /.gdbinit
@@ -40,6 +42,8 @@
 /.npmrc
 /.oracle_jre_usage
 /.passwords
+/.pip
+/.pnctoken
 /.profile
 /.rvm /.sandbox
 /.sbt
@@ -80,6 +84,13 @@
 /Sketches
 /Text
 /Work
+/build
+/conf
+/latency-data
+/ratsoda-scripts
+/repo*
+/scratch
+/script
 
 !/.vim/backup/.gitkeep
 !/.vim/plugged/.gitkeep

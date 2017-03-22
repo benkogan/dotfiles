@@ -55,7 +55,7 @@ function git_info
     end
 
     set --local home_char ''
-    if test "$git_root" = '/Users/Ben'
+    if test "$git_root" = '/Users/Ben' -o "$git_root" = '/Users/bkogan' -o "$git_root" = '/home/bkogan'
       set home_char '·'
     end
 
