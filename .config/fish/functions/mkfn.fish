@@ -1,9 +1,8 @@
 function mkfn
   set --local name "$argv[1]"
   set --local path "$HOME/.config/fish/functions/$name.fish"
-  echo $path
 
-  if test -e $path; do
+  if test -e $path
     echo "Error: file for $name function already exists"
     return 1
   end
