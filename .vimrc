@@ -32,7 +32,7 @@ set display+=lastline           " display last line, even if cut off by bottom
 set noeb vb t_vb=               " no beep, no flash for bell
 
 set list
-set listchars=tab:>-
+set listchars=tab:>-,trail:~
 set cursorline
 
 filetype plugin indent on       " detect filetype and lang-dependent indent
@@ -96,6 +96,9 @@ nore , ;
 " Move through wrapped lines like normal lines
 nnoremap j gj
 nnoremap k gk
+
+" http://stackoverflow.com/questions/4256697
+nnoremap * *``
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''

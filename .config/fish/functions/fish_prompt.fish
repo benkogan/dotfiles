@@ -30,9 +30,9 @@ end
 function curr_host
   set --local current_host (hostname)
   if test $current_host = 'bkogan' -o (echo $current_host | cut -f1 -d ".") = 'Bens-MacBook'
-    printf (in_color green '⌂')
+    printf (in_color green '+')
   else
-    printf (in_color green '⦰')
+    printf (in_color green '-')
   end
 end
 
@@ -56,7 +56,7 @@ function git_info
 
     set --local home_char ''
     if test "$git_root" = '/Users/Ben' -o "$git_root" = '/Users/bkogan' -o "$git_root" = '/home/bkogan'
-      set home_char '·'
+      set home_char '&'
     end
 
     set --local branch (git branch | grep \* | cut -d ' ' -f2)
