@@ -1,15 +1,16 @@
 function drip
-  set --local dir "$TMPDIR/drip-generated/"
-  set --local tmp "$dir/index-"(date +%s)".md"
+  set --local dir "$TMPDIR/drip-generated/"(date +%s)"/"
+  set --local index "$dir/index.md"
 
   if test ! -d $dir
-    mkdir $dir
+    mkdir -p $dir
   end
 
-  echo "# Generated Index" >> $tmp
-  for f in *
-    echo "- [$f]($pwd/$f)" >> $tmp
+  echo "# Generated Index" >> $index
+  for f in *.md
+    cp $f $dir
+    echo "- [$f](./$f)" >> $index
   end
 
-  grip --quiet -b $tmp
+  grip --quiet -b $index
 end
