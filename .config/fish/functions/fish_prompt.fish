@@ -17,7 +17,15 @@ set __fish_git_prompt_showupstream 'yes'
 
 function fish_prompt
   set --local exit_status $status
-  printf '%s%s%s%s%s%s> ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  set --local border (in_color grey (repeatc '-' $COLUMNS))
+  echo $border
+  #printf '%s%s%s%s%s%s> ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  printf '%s%s%s%s%s%s\n' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  echo (in_color grey '> ')
+end
+
+function repeatc -a char -a length
+    printf '%*s\n' $length "" | tr ' ' $char
 end
 
 function p

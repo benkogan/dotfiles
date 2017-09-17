@@ -49,10 +49,10 @@ autocmd BufReadPost *
 " PLUGINS
 
 call plug#begin()
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/syntastic'
-Plug 'airblade/vim-gitgutter'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'scrooloose/syntastic'
+"Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sheerun/vim-polyglot'
@@ -152,6 +152,14 @@ function! RenameFile()
 endfunction
 command! RenameFile :call RenameFile()
 
+function! BBurl()
+  let current_file = expand("%")
+  " after browse: ?at=refs%2Fheads%2FDERP-1252-quantiles
+  " todo: line numbers, failure modes, not the worst bash command ever
+  execute '! printf' shellescape('https://stash.corp.appnexus.com/projects/%s/browse/%s', 1) '$(git config --get remote.origin.url | perl -n -e' shellescape('/^.+\/([a-zA-Z_-]+)\/([a-zA-Z_-]+)\.git$/ && print $1 . "/repos/" . $2', 1) ')' current_file
+endfunction
+command! BBurl :call BBurl()
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ABBREVIATIONS
 
@@ -160,6 +168,9 @@ iab <expr> dts strftime("%Y-%m-%d")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXT, TABS, INDENTATION, SPELL CHECK
+
+set tabstop=4
+set shiftwidth=4
 
 set autoindent
 set spellfile=~/.vim/spell/en.utf-8.add
