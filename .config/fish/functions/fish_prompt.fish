@@ -74,6 +74,8 @@ function git_info
     else
       printf "%s%s%s" "$home_char" (in_color blue "$branch") "$stash_char"
     end
+
+    printf " %s" (git describe --tags --abbrev=0 2> /dev/null)
   end
 end
 
