@@ -19,8 +19,7 @@ function fish_prompt
   set --local exit_status $status
   set --local border (in_color grey (repeatc '-' $COLUMNS))
   echo $border
-  #printf '%s%s%s%s%s%s> ' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
-  printf '%s%s%s%s%s%s\n' (curr_host) (p (colored_cwd)) (p (git_user)) (p (git_info)) (p (time_if_long)) (p (error_if_error $exit_status))
+  echo (curr_host) (colored_cwd) (git_user) (git_info) (time_if_long) (error_if_error $exit_status)
   echo (in_color grey '> ')
 end
 
@@ -50,7 +49,7 @@ end
 
 function git_user
   # sed: cut between @ and .com, inc/exclusive
-  printf (in_color blue (git config user.email | sed 's/^..*\(@..*\)\.com$/\1/'))
+  echo (in_color blue (git config user.email | sed 's/^..*\(@..*\)\.com$/\1/'))
 end
 
 function git_info
@@ -94,8 +93,8 @@ function error_if_error
   end
 end
 
-function in_color
-  set --local color "$argv[1]"
-  set --local message "$argv[2]"
-  printf '%s%s%s' (set_color $color) "$message" (set_color normal)
+function in_color --argument-names color message
+  if test -n "$message"
+    printf '%s%s%s' (set_color $color) "$message" (set_color normal)
+  end
 end

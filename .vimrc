@@ -49,19 +49,17 @@ autocmd BufReadPost *
 " PLUGINS
 
 call plug#begin()
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'vim-airline/vim-airline'
-"Plug 'scrooloose/syntastic'
-"Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-sleuth'
 call plug#end()
 
 let g:airline_theme = 'lucius'
