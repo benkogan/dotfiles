@@ -87,7 +87,7 @@ highlight clear SignColumn
 " MAPPINGS
 
 " Use tab to enter normal mode
-imap <tab> <esc>
+"imap <tab> <esc>
 
 " Use ; instead of : to enter commandline mode
 nore ; :
