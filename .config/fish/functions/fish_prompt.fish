@@ -18,29 +18,22 @@ set __fish_git_prompt_showupstream 'yes'
 function fish_prompt
   set --local exit_status $status
   set --local border (in_color grey (repeatc '-' $COLUMNS))
+
   echo $border
-  echo (curr_host) (colored_cwd) (git_user) (git_info) (time_if_long) (error_if_error $exit_status)
+  echo (curr_time) (colored_cwd) (echo "gcloud:"(gcloud_account)) (echo "git:"(git_user)) (git_info) (time_if_long) (error_if_error $exit_status)
   echo (in_color grey '> ')
 end
 
+function gcloud_account
+  echo (in_color blue (echo "$_GCLOUD_ACCOUNT" | cut -f1 -d"@"))
+end
+
 function repeatc -a char -a length
-    printf '%*s\n' $length "" | tr ' ' $char
+  printf '%*s\n' $length "" | tr ' ' $char
 end
 
-function p
-  set --local str "$argv[1]"
-  if test -n $str
-    printf ' %s' $str
-  end
-end
-
-function curr_host
-  set --local current_host (hostname)
-  if test $current_host = 'bkogan' -o (echo $current_host | cut -f1 -d ".") = 'Bens-MacBook'
-    printf (in_color green '+')
-  else
-    printf (in_color green '-')
-  end
+function curr_time
+  printf (in_color grey (date "+%H:%M:%S"))
 end
 
 function colored_cwd
