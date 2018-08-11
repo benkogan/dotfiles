@@ -1,5 +1,12 @@
 function gcp_set_auth -a file
   set --local config "$XDG_CONFIG_HOME/gcp-auth/$file"
+
+  if test ! -e "$config"
+    echo (in_color red "Error:") "GCP auth config file $file does not exist. Exiting."
+    set --universal _GCLOUD_ACCOUNT "x"
+    return
+  end
+
   set --local project (read_line 1 $config)
   set --local account (read_line 2 $config)
   set --local credentials (read_line 3 $config)
