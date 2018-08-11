@@ -4,10 +4,12 @@
 /.CFUserTextEncoding
 /.Trash
 /.account
+/.ammonite
 /.atom/
 /.autoenvtoken
 /.babel.json
 /.bash*
+/.boto
 /.bundler
 /.cabal
 /.cache
@@ -15,6 +17,7 @@
 /.config/ensime-vim
 /.config/fish/fish*
 /.config/git
+/.config/gcloud/
 /.config/htop
 /.config/mdp
 /.config/nvim
