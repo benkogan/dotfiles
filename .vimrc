@@ -59,7 +59,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-sleuth'
 call plug#end()
 
 let g:airline_theme = 'lucius'

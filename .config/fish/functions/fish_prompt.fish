@@ -20,12 +20,13 @@ function fish_prompt
   set --local border (in_color grey (repeatc '-' $COLUMNS))
 
   echo $border
-  echo (curr_time) (colored_cwd) (echo "gcloud:"(gcloud_account)) (echo "git:"(git_user)) (git_info) (time_if_long) (error_if_error $exit_status)
+  # xargs used to skip empty segments without extraneous padding.
+  echo (curr_time) (colored_cwd) (gcloud_account) (git_user) (git_info) (time_if_long) (error_if_error $exit_status) | xargs echo
   echo (in_color grey '> ')
 end
 
 function gcloud_account
-  echo (in_color blue (echo "$_GCLOUD_ACCOUNT" | cut -f1 -d"@"))
+  echo "gcloud:"(in_color blue (echo "$_GCLOUD_ACCOUNT" | cut -f1 -d"@"))
 end
 
 function repeatc -a char -a length
@@ -42,7 +43,7 @@ end
 
 function git_user
   # sed: cut between @ and .com, inc/exclusive
-  echo (in_color blue (git config user.email | sed 's/^..*\(@..*\)\.com$/\1/'))
+  echo "git:"(in_color blue (git config user.email | sed 's/^..*\(@..*\)\.com$/\1/'))
 end
 
 function git_info
@@ -56,7 +57,7 @@ function git_info
 
     set --local home_char ''
     if test "$git_root" = '/Users/Ben' -o "$git_root" = '/Users/bkogan' -o "$git_root" = '/home/bkogan'
-      set home_char '&'
+      set home_char (in_color grey 'dotfiles:')
     end
 
     set --local branch (git branch | grep \* | cut -d ' ' -f2)
@@ -79,10 +80,9 @@ function time_if_long
   end
 end
 
-function error_if_error
-  set --local exit_status $argv[1]
-  if test $exit_status -gt 0
-    printf (in_color red x)
+function error_if_error -a exit_status
+  if test $exit_status -ne 0
+    printf (in_color grey "err:")(in_color red $exit_status)
   end
 end
 

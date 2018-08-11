@@ -3,7 +3,6 @@ function gcp_set_auth -a file
 
   if test ! -e "$config"
     echo (in_color red "Error:") "GCP auth config file $file does not exist. Exiting."
-    set --universal _GCLOUD_ACCOUNT "x"
     return
   end
 
