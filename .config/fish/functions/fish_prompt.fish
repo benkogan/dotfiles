@@ -21,12 +21,8 @@ function fish_prompt
 
   echo $border
   # xargs used to skip empty segments without extraneous padding.
-  echo (curr_time) (colored_cwd) (gcloud_account) (git_user) (git_info) (time_if_long) (error_if_error $exit_status) | xargs echo
+  echo (curr_time) (colored_cwd) (git_user) (git_info) (time_if_long) (error_if_error $exit_status) | xargs echo
   echo (in_color grey '> ')
-end
-
-function gcloud_account
-  echo "gcloud:"(in_color blue (echo "$_GCLOUD_ACCOUNT" | cut -f1 -d"@"))
 end
 
 function repeatc -a char -a length
