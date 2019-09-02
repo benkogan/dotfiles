@@ -7,9 +7,5 @@ function mkfn
     return 1
   end
 
-  vim -c "\
-1
-i
-function $name
-end" $path
+  vim $path
 end
